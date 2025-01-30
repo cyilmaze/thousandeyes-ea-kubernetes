@@ -1,5 +1,5 @@
 # ThousandEyes Enterprise Agent Kubernetes
-## Deploy ThousandEyes Enterprise Agent on Kubernetes Cluster
+### Deploy ThousandEyes Enterprise Agent on Kubernetes Cluster
 
 <ins>Installation</ins>
 1. Run the following commands on your host
@@ -38,7 +38,7 @@ stringData:
 ```
 kubectl apply -f thousandeyes-ea-kubernetes
 ```
-7. Verify agent is Running
+7. Verify pod is Running
 ```
 kubectl get pods -n thousandeyes
 ```
