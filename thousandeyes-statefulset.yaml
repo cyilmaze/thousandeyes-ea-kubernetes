@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: thousandeyes
+  namespace: thousandeyes
+  labels:
+    app: thousandeyes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thousandeyes
+  template:
+    metadata:
+      labels:
+        app: thousandeyes
+        app.kubernetes.io/name: thousandeyes
+    spec:
+      containers:
+        - name: thousandeyes
+          image: thousandeyes/enterprise-agent
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN","SYS_ADMIN"]
+            seccompProfile:
+              type: Localhost
+              localhostProfile: te-seccomp.json
+            appArmorProfile:
+              type: Localhost
+              localhostProfile: docker_sandbox
+          args:
+            - /sbin/my_init
+          env:
+            - name: TEAGENT_ACCOUNT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: thousandeyes-credentials
+                  key: TEAGENT_ACCOUNT_TOKEN
+            - name: TEAGENT_INET
+              value: "4"
+          volumeMounts:
+            - name: thousandeyes-agent
+              mountPath: /var/lib/te-agent
+            - name: thousandeyes-browserbot
+              mountPath: /var/lib/te-browserbot
+            - name: thousandeyes-log
+              mountPath: /var/log/agent
+            - mountPath: /dev/shm
+              name: shm-volume
+          resources:
+            requests:
+              memory: 2G
+            limits:
+              memory: 2G
+      volumes:
+        - name: thousandeyes-agent
+          persistentVolumeClaim:
+            claimName: thousandeyes-agent
+        - name: thousandeyes-browserbot
+          persistentVolumeClaim:
+            claimName: thousandeyes-browserbot
+        - name: thousandeyes-log
+          persistentVolumeClaim:
+            claimName: thousandeyes-log
+        - name: shm-volume
+          emptyDir:
+            medium: Memory
+            sizeLimit: 512M
