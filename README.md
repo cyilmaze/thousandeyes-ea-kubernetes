@@ -1,6 +1,8 @@
 # ThousandEyes Enterprise Agent Kubernetes
 ### Deploy ThousandEyes Enterprise Agent on Kubernetes Cluster
 
+#FF0000 Disclaimer: This repository contains non-official scripts. Please refer to ThousandEyes Documentation for official deployment models.
+
 <ins>Installation</ins>
 1. Run the following commands on your host
 ```
