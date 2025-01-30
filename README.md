@@ -22,6 +22,18 @@ git clone https://github.com/cyilmaze/thousandeyes-ea-kubernetes.git
 ```
 5.Update the TEAGENT_ACCOUNT_TOKEN variable in thousandeyes-secret.yaml with your ThousandEyes Account Group Token
 ```
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: thousandeyes-credentials
+  namespace: thousandeyes
+  labels:
+    app: thousandeyes
+type: Opaque
+stringData:
+  TEAGENT_ACCOUNT_TOKEN: ""
+```
 6. Apply manifests files to deploy agent
 ```
 kubectl apply -f thousandeyes-ea-kubernetes
