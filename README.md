@@ -1,3 +1,5 @@
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/cyilmaze/thousandeyes-ea-kubernetes)
+
 # ThousandEyes Enterprise Agent Kubernetes
 ### Deploy ThousandEyes Enterprise Agent on Kubernetes Cluster
 

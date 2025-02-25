@@ -46,8 +46,8 @@ spec:
               mountPath: /var/lib/te-browserbot
             - name: thousandeyes-log
               mountPath: /var/log/agent
-            - mountPath: /dev/shm
-              name: shm-volume
+            - name: thousandeyes-shm-volume
+              mountPath: /dev/shm
           resources:
             requests:
               memory: 2G
@@ -63,7 +63,7 @@ spec:
         - name: thousandeyes-log
           persistentVolumeClaim:
             claimName: thousandeyes-log
-        - name: shm-volume
+        - name: thousandeyes-shm-volume
           emptyDir:
             medium: Memory
             sizeLimit: 512M
